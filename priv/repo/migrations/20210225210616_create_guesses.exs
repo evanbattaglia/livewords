@@ -4,7 +4,7 @@ defmodule Livewords.Repo.Migrations.CreateGuesses do
   def change do
     create table(:guesses) do
       add :text, :string
-      add :game_id, references(:games, on_delete: :nothing)
+      add :game_id, references(:games, on_delete: :delete_all)
 
       timestamps()
     end
