@@ -17,9 +17,9 @@ defmodule LivewordsWeb.Router do
   scope "/", LivewordsWeb do
     pipe_through :browser
 
-    resources "/games", GameController
+    resources "/games", GameController, except: [:show]
 
-    live "/", PageLive, :index
+    live "/games/:game_id", PlayLive, :index
   end
 
   # Other scopes may use custom stacks.

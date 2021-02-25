@@ -89,3 +89,23 @@
   display: block;
   margin: -1rem 0 2rem;
 }
+
+
+ul.clues, ul.guesses {
+  display: table; // this might not be right exactly but it works
+
+  > li:nth-child(odd) {
+    background-color: #ddddff;
+  }
+  > li:nth-child(even) {
+    background-color: #ddffdd;
+  }
+  > li {
+    list-style-type: none;
+    float: left;
+    padding-left: 10px;
+    padding-right: 5px;
+    margin-right: 10px;
+  }
+}
+

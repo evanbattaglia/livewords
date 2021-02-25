@@ -1,0 +1,29 @@
+<section>
+  <h1>Clues</h1>
+  <ul class="clues">
+    <%= for clue <- @clues do %>
+      <li><%= clue.text %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <h1>Guesses</h1>
+  <ul class="guesses">
+    <%= for guess <- @guesses do %>
+      <li><%= guess.text %></li>
+    <% end %>
+  </ul>
+</section>
+
+<form phx-submit="guess">
+  <h3>Guess:</h3>
+  <input type="text" name="text" />
+  <input type="submit" name="submit" />
+</form>
+
+<form phx-submit="clue">
+  <h3>Guess:</h3>
+  <input type="text" name="text" />
+  <input type="submit" name="submit" />
+</form>

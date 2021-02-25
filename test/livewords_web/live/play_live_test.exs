@@ -1,4 +1,4 @@
-defmodule LivewordsWeb.PageLiveTest do
+defmodule LivewordsWeb.PlayLiveTest do
   use LivewordsWeb.ConnCase
 
   import Phoenix.LiveViewTest
