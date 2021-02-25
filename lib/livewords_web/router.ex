@@ -17,6 +17,8 @@ defmodule LivewordsWeb.Router do
   scope "/", LivewordsWeb do
     pipe_through :browser
 
+    resources "/games", GameController
+
     live "/", PageLive, :index
   end
 
