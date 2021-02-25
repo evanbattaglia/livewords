@@ -22,14 +22,6 @@ defmodule LivewordsWeb.PlayLive do
   end
 
   @impl true
-  def handle_event("clue", %{"text" => text}, socket) do
-    game_id = socket.assigns.game_id
-    Games.create_clue(game_id, text)
-    LivewordsWeb.Endpoint.broadcast_from(self(), topic(game_id), "update_clues", nil)
-    {:noreply, assign(socket, clues: Games.get_clues(game_id))}
-  end
-
-  @impl true
   def handle_info(%{event: "update_guesses"}, socket) do
     {:noreply, assign(socket, guesses: Games.get_guesses(socket.assigns.game_id))}
   end
