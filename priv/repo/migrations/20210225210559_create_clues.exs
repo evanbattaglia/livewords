@@ -4,7 +4,7 @@ defmodule Livewords.Repo.Migrations.CreateClues do
   def change do
     create table(:clues) do
       add :text, :string
-      add :game_id, references(:games, on_delete: :delete_all)
+      add :game_id, references(:games, on_delete: :delete_all), null: false
 
       timestamps()
     end

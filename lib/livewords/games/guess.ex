@@ -4,7 +4,8 @@ defmodule Livewords.Games.Guess do
 
   schema "guesses" do
     field :text, :string
-    field :game_id, :id
+
+    belongs_to :game, Livewords.Games.Game
 
     timestamps()
   end
@@ -12,7 +13,8 @@ defmodule Livewords.Games.Guess do
   @doc false
   def changeset(guess, attrs) do
     guess
-    |> cast(attrs, [:text])
-    |> validate_required([:text])
+    |> cast(attrs, [:text, :game_id])
+    |> validate_required([:text, :game_id])
+    |> foreign_key_constraint(:game_id)
   end
 end

@@ -5,6 +5,9 @@ defmodule Livewords.Games.Game do
   schema "games" do
     field :name, :string
 
+    has_many :guesses, Livewords.Games.Guess
+    has_many :clues, Livewords.Games.Clue
+
     timestamps()
   end
 
