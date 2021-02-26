@@ -19,16 +19,11 @@ defmodule LivewordsWeb.GameController do
       {:ok, game} ->
         conn
         |> put_flash(:info, "Game created successfully.")
-        |> redirect(to: Routes.game_path(conn, :show, game))
+        |> redirect(to: Routes.game_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
-  end
-
-  def show(conn, %{"id" => id}) do
-    game = Games.get_game!(id)
-    render(conn, "show.html", game: game)
   end
 
   def edit(conn, %{"id" => id}) do

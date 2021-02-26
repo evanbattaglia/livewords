@@ -105,7 +105,7 @@ defmodule Livewords.Games do
   alias Livewords.Games.Clue
 
   def get_clues(game_id) do
-    Repo.all(from c in Clue, where: c.game_id == ^game_id)
+    Repo.all(from c in Clue, where: c.game_id == ^game_id, select: c.text)
   end
 
   def create_clue(game_id, text) do
@@ -117,7 +117,7 @@ defmodule Livewords.Games do
   alias Livewords.Games.Guess
 
   def get_guesses(game_id) do
-    Repo.all(from g in Guess, where: g.game_id == ^game_id)
+    Repo.all(from g in Guess, where: g.game_id == ^game_id, select: g.text)
   end
 
   def create_guess(game_id, text) do

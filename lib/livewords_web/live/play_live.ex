@@ -2,7 +2,7 @@ defmodule LivewordsWeb.PlayLive do
   use LivewordsWeb, :live_view
   alias Livewords.Games
 
-  defp topic(game_id), do: "game:#{game_id}"
+  defp topic(game_id), do: "game:#{game_id}" # TODO dedup
 
   @impl true
   def mount(%{"game_id" => game_id}, _session, socket) do

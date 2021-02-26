@@ -2,36 +2,47 @@ defmodule LivewordsWeb.HostLive do
   use LivewordsWeb, :live_view
   alias Livewords.Games
 
+  @game_type :person # TODO
+
   defp topic(game_id), do: "game:#{game_id}"
 
-  # TODO much is shared with PlayLive, extract
+  # TODO much is shared with PlayLive. extract.
 
   def clue_string(template, modifiers, nouns) do
-    [template] ++ Enum.reverse(modifiers) ++ Enum.reverse(nouns)
-    |> Enum.join(" ")
+    mod_string = modifiers |> Enum.reverse |> Enum.join(" ")
+    noun_string = nouns |> Enum.reverse |> Enum.join(" ")
+
+    :io_lib.format(template, [mod_string, noun_string])
+    |> to_string
+    |> String.replace("  ", " ")
   end
 
   def button_classes(word, used_words) do
     if Enum.member?(used_words, word), do: "used", else: "unused"
   end
 
-  defp new_palette_assigns do
-    Livewords.Corpus.new_palette(5, 5) ++ [used_modifiers: [], used_nouns: []]
+  defp assign_new_palette(socket) do
+    {template, modifiers, nouns} =
+      Livewords.Corpus.new_palette(@game_type, 12, 12, socket.assigns.guesses)
+
+    assign(
+      socket,
+      template: template, modifiers: modifiers, nouns: nouns,
+      used_modifiers: [], used_nouns: []
+    )
   end
 
   @impl true
   def mount(%{"game_id" => game_id}, _session, socket) do
     LivewordsWeb.Endpoint.subscribe(topic(game_id))
 
-    assigns = new_palette_assigns() ++ [
+    assigns = [
       game_id: game_id,
       clues: Games.get_clues(game_id),
       guesses: Games.get_guesses(game_id),
-      used_modifiers: [],
-      used_nouns: [],
     ]
 
-    {:ok, assign(socket, assigns)}
+    {:ok, socket |> assign(assigns) |> assign_new_palette}
   end
 
   @impl true
@@ -40,12 +51,12 @@ defmodule LivewordsWeb.HostLive do
     Games.create_clue(game_id, text)
     LivewordsWeb.Endpoint.broadcast_from(self(), topic(game_id), "update_clues", nil)
       
-    {:noreply, assign(socket, new_palette_assigns() ++ [clues: Games.get_clues(game_id)])}
+    {:noreply, socket |> assign_new_palette |> assign(clues: Games.get_clues(game_id))}
   end
 
   @impl true
   def handle_event("skip", _, socket) do
-    {:noreply, assign(socket, new_palette_assigns()}
+    {:noreply, assign_new_palette(socket)}
   end
 
   defp add_or_remove(list, word) do

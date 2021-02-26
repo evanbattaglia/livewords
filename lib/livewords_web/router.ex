@@ -18,6 +18,7 @@ defmodule LivewordsWeb.Router do
     pipe_through :browser
 
     resources "/games", GameController, except: [:show]
+    get "/", GameController, :index
 
     live "/games/:game_id", PlayLive, :index
     live "/games/:game_id/host", HostLive, :index

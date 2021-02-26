@@ -2,7 +2,7 @@
   <h1>Clues</h1>
   <ul class="clues">
     <%= for clue <- @clues do %>
-      <li><%= clue.text %></li>
+      <li><%= clue %></li>
     <% end %>
   </ul>
 </section>
@@ -11,7 +11,7 @@
   <h1>Guesses</h1>
   <ul class="guesses">
     <%= for guess <- @guesses do %>
-      <li><%= guess.text %></li>
+      <li><%= guess %></li>
     <% end %>
   </ul>
 </section>

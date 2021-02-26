@@ -2,7 +2,7 @@
   <h1>Clues</h1>
   <ul class="clues">
     <%= for clue <- @clues do %>
-      <li><%= clue.text %></li>
+      <li><%= clue %></li>
     <% end %>
   </ul>
 </section>
@@ -11,13 +11,14 @@
   <h1>Guesses</h1>
   <ul class="guesses">
     <%= for guess <- @guesses do %>
-      <li><%= guess.text %></li>
+      <li><%= guess %></li>
     <% end %>
   </ul>
 </section>
 
 <div class="new-clue">
   <h3>Give Clue:</h3>
+    <button phx-click="skip" id="skip">Skip</button>
     <button id="new-clue-submit" phx-click="new_clue" phx-value-text="<%= clue_string(@template, @used_modifiers, @used_nouns) %>">Submit</button>
     <span class="clue-in-progress-clue"><%= clue_string(@template, @used_modifiers, @used_nouns) %></span>
   <div id="builder">
