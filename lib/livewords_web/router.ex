@@ -20,6 +20,7 @@ defmodule LivewordsWeb.Router do
     resources "/games", GameController, except: [:show]
 
     live "/games/:game_id", PlayLive, :index
+    live "/games/:game_id/host", HostLive, :index
   end
 
   # Other scopes may use custom stacks.

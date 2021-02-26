@@ -14,7 +14,8 @@
       <td><%= game.name %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.play_path(@conn, :index, game.id) %></span>
+        <span><%= link "Play", to: Routes.play_path(@conn, :index, game.id) %></span>
+        <span><%= link "Host", to: Routes.host_path(@conn, :index, game.id) %></span>
         <span><%= link "Edit", to: Routes.game_path(@conn, :edit, game) %></span>
         <span><%= link "Delete", to: Routes.game_path(@conn, :delete, game), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>

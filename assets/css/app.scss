@@ -109,3 +109,42 @@ ul.clues, ul.guesses {
   }
 }
 
+
+
+#builder {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+
+  #modifiers {
+    grid-column: 1 / 2;
+    button.unused {
+      background-color: #aa3322;
+      border-color: #aa3322;
+    }
+    button.used {
+      background-color: #aa7766;
+      border-color: #aa7766;
+    }
+  }
+
+  #nouns {
+    grid-column: 2 / 2;
+    button.unused {
+      background-color: #0069d9;
+      border-color: #0069d9;
+    }
+    button.used {
+      background-color: #447788;
+      border-color: #447788;
+    }
+  }
+
+  #modifiers, #nouns {
+    li {
+      cursor: pointer;
+    }
+  }
+}
+

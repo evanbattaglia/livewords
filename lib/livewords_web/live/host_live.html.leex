@@ -1,0 +1,35 @@
+<section>
+  <h1>Clues</h1>
+  <ul class="clues">
+    <%= for clue <- @clues do %>
+      <li><%= clue.text %></li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <h1>Guesses</h1>
+  <ul class="guesses">
+    <%= for guess <- @guesses do %>
+      <li><%= guess.text %></li>
+    <% end %>
+  </ul>
+</section>
+
+<div class="new-clue">
+  <h3>Give Clue:</h3>
+    <button id="new-clue-submit" phx-click="new_clue" phx-value-text="<%= clue_string(@template, @used_modifiers, @used_nouns) %>">Submit</button>
+    <span class="clue-in-progress-clue"><%= clue_string(@template, @used_modifiers, @used_nouns) %></span>
+  <div id="builder">
+    <ul id="modifiers">
+      <%= for modifier <- @modifiers do %>
+        <button class="<%= button_classes(modifier, @used_modifiers) %>" phx-click="modifier" phx-value-word="<%= modifier %>"><%= modifier %></button>
+      <% end %>
+    </ul>
+    <ul id="nouns">
+      <%= for noun <- @nouns do %>
+        <button class="<%= button_classes(noun, @used_nouns) %>" phx-click="noun" phx-value-word="<%= noun %>"><%= noun %></button>
+      <% end %>
+    </ul>
+  </div>
+</section>
